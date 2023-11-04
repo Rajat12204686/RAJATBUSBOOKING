@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VInputField">
+        <attr name="v_icon" format="integer"/>
+        <attr name="v_hint" format="string"/>
+        <attr name="v_inputType" format="flags">
+            <flag name="v_text" value="0"/>
+            <flag name="v_phone" value="1"/>
+            <flag name="v_autoComplete" value="2"/>
+            <flag name="v_date" value="4"/>
+            <flag name="v_code" value="8"/>
+        </attr>
+        <attr name="v_code_length" format="integer"/>
+    </declare-styleable>
+</resources>

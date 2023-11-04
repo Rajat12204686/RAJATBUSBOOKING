@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="inc.fabudi.rentors.viewmodels.RoutesViewModel" />
+        <import type="inc.fabudi.rentors.R" />
+        <import type="androidx.core.content.ContextCompat" />
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ProgressBar
+            android:id="@+id/order_progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:visibility="@{viewModel.orderInProcess ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/order_state_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/order_state_image"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:contentDescription="@string/order_status_icon"
+            android:src="@{viewModel.successfulOrder ? ContextCompat.getDrawable(context,R.drawable.success) : ContextCompat.getDrawable(context,R.drawable.error) }"
+            android:visibility="@{viewModel.orderCompleted ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/order_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/radioButton"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="@{viewModel.orderCompleted ? View.INVISIBLE : viewModel.orderInProcess ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_1" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_2" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_3" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/order_cancel"
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/v_button_bg"
+                android:enabled="@{!viewModel.orderInProcess}"
+                android:text="@string/cancel" />
+
+            <Button
+                android:id="@+id/order_complete"
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/v_button_bg"
+                android:enabled="@{!viewModel.orderInProcess}"
+                android:text="@string/complete" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "167289578182",
+    "firebase_url": "https://latta-lattaboyz-default-rtdb.firebaseio.com",
+    "project_id": "latta-lattaboyz",
+    "storage_bucket": "latta-lattaboyz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167289578182:android:cf204bbc994a2cf998edc7",
+        "android_client_info": {
+          "package_name": "com.examples.rentors"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167289578182-af4cf5tj099eclo1rs66qsg0q5hoia9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAQNlY_3en8jM3NkmJgVw_hrJ4OibbE6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167289578182-af4cf5tj099eclo1rs66qsg0q5hoia9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167289578182:android:1f181fd792621c2698edc7",
+        "android_client_info": {
+          "package_name": "com.lattaboyz.latta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167289578182-af4cf5tj099eclo1rs66qsg0q5hoia9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAQNlY_3en8jM3NkmJgVw_hrJ4OibbE6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167289578182-af4cf5tj099eclo1rs66qsg0q5hoia9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

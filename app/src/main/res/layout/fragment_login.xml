@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.LoginFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="inc.fabudi.rentors.viewmodels.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/background_gray"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/login_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="?attr/colorPrimary"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/tickets_app_bar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/semi_circle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_app_bar" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/loginCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="30dp"
+            app:cardCornerRadius="35dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_app_bar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="30dp">
+
+                <TextView
+                    android:id="@+id/login_phone_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:gravity="center"
+                    android:text="@string/please_login"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/login_input_fields"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginEnd="15dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/login_phone_label">
+
+                    <com.examples.rentors.ui.VInputField
+                        android:id="@+id/login_phone_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{viewModel.codeSent ? View.GONE : View.VISIBLE}"
+                        app:v_hint="+375 12 345-67-89"
+                        app:v_icon="@drawable/baseline_call_24"
+                        app:v_inputType="v_phone" />
+
+                    <com.examples.rentors.ui.VInputField
+                        android:id="@+id/login_name_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{viewModel.newUser ? View.VISIBLE : View.GONE}"
+                        app:v_hint="John"
+                        app:v_icon="@drawable/baseline_account_box_24"
+                        app:v_inputType="v_text" />
+
+                    <com.examples.rentors.ui.VInputField
+                        android:id="@+id/login_lastname_input"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="30dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{viewModel.newUser ? View.VISIBLE : View.GONE}"
+                        app:v_hint="Doe"
+                        app:v_icon="@drawable/baseline_account_box_24"
+                        app:v_inputType="v_text" />
+
+                    <com.examples.rentors.ui.VInputField
+                        android:id="@+id/login_code_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:v_code_length="6"
+                        android:visibility="@{viewModel.codeSent ? viewModel.loggedIn ? View.GONE : View.VISIBLE :  View.GONE}"
+                        app:v_inputType="v_code" />
+                </LinearLayout>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/login_next"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/v_button_bg"
+                    android:backgroundTint="#000000"
+                    android:minHeight="60dp"
+                    android:text="@{viewModel.codeSent ? viewModel.newUser ? @string/complete : @string/confirm : @string/send_code}"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/login_input_fields" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <LinearLayout
+            android:id="@+id/info_input_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/name_edit_text"
+                android:text="@string/enter_your_full_name" />
+
+            <EditText
+                android:id="@+id/name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="name"
+                android:inputType="textPersonName"
+                android:text="@string/john" />
+
+            <EditText
+                android:id="@+id/lastname_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="personFamilyName"
+                android:inputType="textPersonName"
+                android:text="@string/doe" />
+
+            <Button
+                android:id="@+id/info_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/complete" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/code_input_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/input_code" />
+
+            <EditText
+                android:id="@+id/code_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="smsOTPCode"
+                android:ems="6"
+                android:inputType="number"
+                android:text="@string/debug_code" />
+
+            <Button
+                android:id="@+id/send_code_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/complete" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/phone_input_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/input_number" />
+
+            <EditText
+                android:id="@+id/phone_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autofillHints="phone"
+                android:ems="10"
+                android:inputType="phone"
+                android:text="@string/debug_number" />
+
+            <Button
+                android:id="@+id/send_phone_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/send_code" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

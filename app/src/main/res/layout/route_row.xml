@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="route"
+            type="inc.fabudi.rentors.domain.Route" />
+
+        <variable
+            name="routeCallback"
+            type="inc.fabudi.rentors.ui.RouteClick" />
+    </data>
+
+    <LinearLayout
+        android:background="@drawable/ticket_background"
+        android:backgroundTint="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:padding="8dp">
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/dash_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ticket_seats_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/seats"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/ticket_seats"
+                app:layout_constraintStart_toStartOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/ticket_seats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:includeFontPadding="false"
+                android:text="@{(route.ticketsLeft >= 3) ? @string/_3more : String.valueOf(route.ticketsLeft), default=`3+`}"
+                android:textColor="@color/dark_gray"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/ticket_seats_label" />
+
+            <TextView
+                android:id="@+id/ticket_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:includeFontPadding="false"
+                android:text="@{String.valueOf(route.price), default=`10`}"
+                android:textColor="@color/dark_gray"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/ticket_seats"
+                app:layout_constraintEnd_toEndOf="@+id/view" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/dash_line"
+                app:layout_constraintBottom_toBottomOf="@+id/ticket_from"
+                app:layout_constraintEnd_toStartOf="@id/ticket_to"
+                app:layout_constraintStart_toEndOf="@+id/ticket_from"
+                app:layout_constraintTop_toTopOf="@+id/ticket_to" />
+
+            <TextView
+                android:id="@+id/ticket_travel_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@{String.valueOf(route.travelTimeHours) + @string/hour + ' ' + String.valueOf(route.travelTimeMinutes) + @string/minute, default=`1h 0min`}"
+                android:textColor="@android:color/darker_gray"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/view2"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="@+id/view2" />
+
+            <TextView
+                android:id="@+id/ticket_price_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:includeFontPadding="true"
+                android:text="BYN"
+                android:textColor="@color/dark_gray"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@id/ticket_price"
+                app:layout_constraintEnd_toStartOf="@id/ticket_price" />
+
+            <TextView
+                android:id="@+id/ticket_departure_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="@{String.valueOf(route.departureDateTime.hours), default=`13`}"
+                android:textColor="@color/dark_gray"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ticket_departure_time_minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(route.departureDateTime.minutes), default=`00`}"
+                android:textColor="@color/dark_gray"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/ticket_departure_time"
+                app:layout_constraintTop_toTopOf="@+id/ticket_departure_time" />
+
+            <TextView
+                android:id="@+id/ticket_arrival_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="@{String.valueOf(route.arrivalDateTime.hours), default=`15`}"
+                android:textColor="@color/dark_gray"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/ticket_arrival_time_minutes"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ticket_arrival_time_minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(route.arrivalDateTime.minutes), default=`00`}"
+                android:textColor="@color/dark_gray"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/ticket_arrival_time" />
+
+            <TextView
+                android:id="@+id/ticket_from"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/v_button_sm"
+                android:gravity="center"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:singleLine="true"
+                android:text="@{route.from, default=`Barysaw`}"
+                android:textColor="@color/white"
+                app:autoSizeMaxTextSize="12sp"
+                app:autoSizeMinTextSize="1sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="@+id/ticket_departure_time_minutes"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/ticket_departure_time" />
+
+            <TextView
+                android:id="@+id/ticket_to"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/v_button_sm"
+                android:gravity="center"
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+                android:singleLine="true"
+                android:text="@{route.to, default=`Minsk`}"
+                android:textColor="@color/white"
+                app:autoSizeMaxTextSize="12sp"
+                app:autoSizeMinTextSize="1sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/ticket_arrival_time"
+                app:layout_constraintTop_toBottomOf="@+id/ticket_arrival_time" />
+
+
+            <View
+                android:id="@+id/clickableOverlay"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="@{() -> routeCallback.onClick(route)}"
+                android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</layout>
